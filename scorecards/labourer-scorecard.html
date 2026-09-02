@@ -1,0 +1,552 @@
+<title>Labourer Scorecard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap">
+<style>
+:root {
+  --color-bg: #f3f2f2;
+  --color-surface: #eae9e9;
+  --color-text: #201e1d;
+  --color-ink: #1b1c21;
+  --color-accent: #f0a32e;
+  --color-accent-100: #fdf3e3;
+  --color-accent-200: #fbe3bd;
+  --color-accent-600: #d28619;
+  --color-accent-700: #a8690e;
+  --color-accent-800: #7b4b07;
+  --color-divider: color-mix(in srgb, #201e1d 40%, transparent);
+  --hair: 1px solid color-mix(in srgb, #201e1d 18%, transparent);
+  --font-heading: "Archivo", system-ui, -apple-system, sans-serif;
+  --font-body: "Archivo", system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--color-bg); color: var(--color-text);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.55; font-weight: 400;
+}
+h1, h2 { font-family: var(--font-heading); font-weight: 800; line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 8px; }
+p { margin: 0 0 12px; }
+a { color: var(--color-accent-800); text-underline-offset: 3px; }
+a:hover { color: var(--color-accent-700); }
+img { display: block; max-width: 100%; }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent-700); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 40%, transparent); }
+
+.nav {
+  display: flex; align-items: center; gap: 16px; padding: 12px 16px;
+  border-bottom: 2px solid var(--color-divider);
+}
+.nav img { height: 48px; }
+.nav-note {
+  margin-left: auto; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; font-family: var(--font-heading); font-weight: 800; font-size: 14px;
+  line-height: 1.2; color: var(--color-text); background: transparent;
+  border: 1px solid var(--color-divider); border-radius: 0; padding: 8px 14px; white-space: nowrap;
+}
+.btn:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+
+main { max-width: 1100px; margin: 0 auto; padding: 0 28px 72px; }
+
+.page-head { padding: 36px 0 24px; border-bottom: 2px solid var(--color-divider); }
+.kicker {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+  color: var(--color-accent-700); margin-bottom: 10px;
+}
+.page-head h1 { font-size: 42px; margin: 0 0 10px; text-wrap: balance; }
+.page-head p {
+  margin: 0; max-width: 62ch; font-size: 15px; text-wrap: pretty;
+  color: color-mix(in srgb, var(--color-text) 72%, transparent);
+}
+
+.eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.55; margin-bottom: 14px; }
+
+.details { padding: 26px 0 30px; border-bottom: 2px solid var(--color-divider); }
+.row { display: flex; flex-wrap: wrap; gap: 16px 24px; }
+.row + .row { margin-top: 18px; }
+.field { display: flex; flex-direction: column; }
+.field > label { font-size: 12px; margin-bottom: 5px; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+.input {
+  width: 100%; min-height: 36px; padding: 6px 10px; font: inherit; font-size: 14px;
+  color: var(--color-text); caret-color: var(--color-accent-600);
+  background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: 0;
+}
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent-600); outline-offset: 0; }
+.seg { display: inline-flex; border: 1px solid var(--color-divider); }
+.seg-opt { display: inline-flex; align-items: center; padding: 7px 12px; font-size: 13px; cursor: pointer; }
+.seg-opt input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.seg-opt + .seg-opt { border-left: 1px solid var(--color-divider); }
+.seg-opt:has(input:checked) { background: var(--color-accent); color: var(--color-text); font-weight: 600; }
+.seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.seg-opt:has(input:focus-visible) { outline: 2px solid var(--color-accent-700); outline-offset: -2px; }
+.gate-note {
+  margin: 8px 0 0; font-size: 13px; max-width: 72ch; text-wrap: pretty;
+  color: color-mix(in srgb, var(--color-text) 62%, transparent);
+}
+
+.sec-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding: 26px 0 4px; }
+.sec-head.ruled { border-top: 2px solid var(--color-divider); margin-top: 12px; }
+.sec-num { font-family: var(--font-heading); font-weight: 800; font-size: 13px; color: var(--color-accent-700); }
+.sec-head h2 { font-size: 26px; margin: 0; }
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px; padding: 3px 10px;
+  background: var(--color-accent-100); color: var(--color-accent-800);
+}
+.sec-tally { margin-left: auto; text-align: right; font-variant-numeric: tabular-nums; }
+.sec-pts { font-family: var(--font-heading); font-weight: 800; font-size: 24px; line-height: 1; white-space: nowrap; }
+.sec-pts span { font-size: 13px; font-weight: 600; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+.sec-avg { font-size: 12px; white-space: nowrap; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+.sec-note {
+  margin: 0 0 8px; font-size: 13px; max-width: 78ch; text-wrap: pretty;
+  color: color-mix(in srgb, var(--color-text) 62%, transparent);
+}
+
+.crit { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; padding: 14px 0; border-top: var(--hair); }
+.crit-label { flex: 1; min-width: 250px; }
+.crit-name { font-weight: 600; font-size: 15px; }
+.crit-desc { font-size: 13px; text-wrap: pretty; color: color-mix(in srgb, var(--color-text) 62%, transparent); }
+.scale { display: flex; border: 1px solid var(--color-divider); }
+.scale button {
+  width: 36px; height: 40px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-heading); font-size: 14px; font-weight: 500; cursor: pointer;
+  border: none; padding: 0; background: transparent;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.scale button + button { border-left: 1px solid var(--color-divider); }
+.scale button:hover { background: var(--color-accent-200); }
+.scale button:focus-visible { outline: 2px solid var(--color-accent-700); outline-offset: -2px; }
+.scale button[aria-pressed="true"] { background: var(--color-accent); color: var(--color-text); font-weight: 800; }
+
+.band {
+  margin-top: 36px; padding: 34px 32px 30px; display: flex; flex-wrap: wrap;
+  gap: 26px 56px; align-items: flex-end; background: var(--color-accent); color: var(--color-text);
+}
+.band.failed { background: var(--color-ink); color: #f3f2f2; }
+.band-kicker { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+.band-score {
+  font-family: var(--font-heading); font-weight: 800; font-size: 86px; line-height: 0.95;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.band-score span { font-size: 22px; font-weight: 600; }
+.band-sub { font-size: 13px; margin-top: 10px; opacity: 0.75; }
+.band-verdict { flex: 1; min-width: 260px; }
+.band-title { font-family: var(--font-heading); font-weight: 800; font-size: 26px; line-height: 1.15; text-wrap: pretty; }
+.band-line { font-size: 14px; margin-top: 8px; opacity: 0.82; }
+.band-foot {
+  margin: 14px 0 0; font-size: 13px; max-width: 70ch; text-wrap: pretty;
+  color: color-mix(in srgb, var(--color-text) 62%, transparent);
+}
+
+.guide { border-top: 2px solid var(--color-divider); margin-top: 36px; padding-top: 26px; }
+.guide h2 { font-size: 26px; margin: 0 0 20px; }
+.guide-grid { display: flex; flex-wrap: wrap; gap: 32px 48px; }
+.guide-col-a { flex: 1.2 1 300px; }
+.guide-col-b { flex: 1 1 300px; display: grid; gap: 28px; align-content: start; }
+.guide-col-full { flex: 1 1 100%; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th {
+  text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  padding: 8px; border-bottom: 2px solid var(--color-divider);
+}
+td { padding: 8px; border-bottom: 1px solid var(--color-divider); }
+tbody tr:hover { background: color-mix(in srgb, var(--color-text) 4%, transparent); }
+.rules { margin: 0; padding-left: 18px; font-size: 14px; display: grid; gap: 6px; max-width: 78ch; }
+.note { font-size: 13px; color: color-mix(in srgb, var(--color-text) 62%, transparent); margin: 10px 0 0; }
+
+footer {
+  border-top: 2px solid var(--color-divider); margin-top: 44px; padding-top: 16px;
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline;
+}
+footer span { font-size: 12px; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+footer a { font-size: 12px; margin-left: auto; }
+
+@media print {
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .nav .btn { display: none; }
+  .crit, .band, .guide { break-inside: avoid; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+
+<nav class="nav">
+  <img src="data:image/png;base64,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" alt="Sydney Piling">
+  <span class="nav-note">Internal hiring tool</span>
+  <button type="button" class="btn" id="reset">Reset form</button>
+</nav>
+
+<main>
+  <header class="page-head">
+    <div class="kicker">Recruitment</div>
+    <h1>Labourer Scorecard</h1>
+    <p>Score every criterion 0 to 10, whole numbers only. Tap a number to score it, tap again to clear. Totals, weighting and the result calculate themselves.</p>
+  </header>
+
+  <section class="details">
+    <div class="eyebrow">Candidate details</div>
+    <div class="row">
+      <div class="field" style="flex:2 1 240px"><label for="f-name">Candidate name</label><input class="input" id="f-name" data-d="name" placeholder="Full name"></div>
+      <div class="field" style="flex:2 1 240px"><label for="f-role">Role</label><input class="input" id="f-role" data-d="role" placeholder="Role applied for"></div>
+      <div class="field" style="flex:1 1 160px"><label for="f-date">Date</label><input class="input" id="f-date" data-d="date" type="date"></div>
+    </div>
+    <div class="row">
+      <div class="field" style="flex:1 1 240px"><label for="f-assessor">Assessor</label><input class="input" id="f-assessor" data-d="assessor" placeholder="Who is scoring"></div>
+      <div class="field" style="flex:1 1 240px"><label for="f-stage">Stage</label><input class="input" id="f-stage" data-d="stage" placeholder="Interview / Reference / Trial"></div>
+    </div>
+    <div class="row" style="gap:16px 40px">
+      <div class="field">
+        <label>Mandatory experience gate met?</label>
+        <div class="seg" role="radiogroup" aria-label="Mandatory gate met">
+          <label class="seg-opt"><input type="radio" name="gate" value="yes">Yes</label>
+          <label class="seg-opt"><input type="radio" name="gate" value="no">No</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Minimum score for this role</label>
+        <div class="seg" role="radiogroup" aria-label="Minimum score">
+          <label class="seg-opt"><input type="radio" name="min" value="70">70 &middot; General labouring</label>
+          <label class="seg-opt"><input type="radio" name="min" value="80">80 &middot; Skilled &amp; operator</label>
+        </div>
+      </div>
+    </div>
+    <p class="gate-note"><strong>Gate for this role:</strong> Full working rights, White Card held or being obtained, able to get to Eastern Suburbs sites reliably, and physically able to do sustained manual work.</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <h2>Attitude &amp; Culture</h2>
+      <span class="tag">60% of total score</span>
+      <div class="sec-tally">
+        <div class="sec-pts" id="att-pts">&mdash;<span> / 60</span></div>
+        <div class="sec-avg" id="att-avg">avg &mdash; / 10</div>
+      </div>
+    </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Determination &amp; Work Ethic</div><div class="crit-desc">Works hard, takes ownership and gets stuck in.</div></div>
+        <div class="scale" role="group" aria-label="Determination & Work Ethic" data-sec="att" data-i="0"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Respect &amp; Manners</div><div class="crit-desc">Communicates respectfully with clients, suppliers, management and teammates.</div></div>
+        <div class="scale" role="group" aria-label="Respect & Manners" data-sec="att" data-i="1"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Organisation &amp; Reliability</div><div class="crit-desc">Punctual, prepared, organised and dependable.</div></div>
+        <div class="scale" role="group" aria-label="Organisation & Reliability" data-sec="att" data-i="2"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Team Fit / No-Dickhead Policy</div><div class="crit-desc">Easy to work with, no unnecessary ego, helps the wider team.</div></div>
+        <div class="scale" role="group" aria-label="Team Fit / No-Dickhead Policy" data-sec="att" data-i="3"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Respect for Structure &amp; Leadership</div><div class="crit-desc">Follows instructions, uses correct channels, respects leadership roles.</div></div>
+        <div class="scale" role="group" aria-label="Respect for Structure & Leadership" data-sec="att" data-i="4"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Commitment to Learning &amp; Improvement</div><div class="crit-desc">Open to feedback, willing to learn and become better at the role.</div></div>
+        <div class="scale" role="group" aria-label="Commitment to Learning & Improvement" data-sec="att" data-i="5"></div>
+      </div>
+  </section>
+
+  <section>
+    <div class="sec-head ruled">
+      <div class="sec-num">02</div>
+      <h2>Skills</h2>
+      <span class="tag">20% of total score</span>
+      <div class="sec-tally">
+        <div class="sec-pts" id="skl-pts">&mdash;<span> / 20</span></div>
+        <div class="sec-avg" id="skl-avg">avg &mdash; / 10</div>
+      </div>
+    </div>
+    <p class="sec-note">Criteria below are set for the Piling Labourer role. Experience is welcome but not essential, attitude carries most of the weight.</p>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Physical Capability &amp; Stamina</div><div class="crit-desc">Handles digging, lifting and long days on site without dropping off.</div></div>
+        <div class="scale" role="group" aria-label="Physical Capability & Stamina" data-sec="skl" data-i="0"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Site Safety Awareness</div><div class="crit-desc">Wears PPE, follows safe work method statements, stays alert around excavations and plant.</div></div>
+        <div class="scale" role="group" aria-label="Site Safety Awareness" data-sec="skl" data-i="1"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Following Instructions</div><div class="crit-desc">Listens, takes direction properly and completes the task without needing to be chased.</div></div>
+        <div class="scale" role="group" aria-label="Following Instructions" data-sec="skl" data-i="2"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Hand Tools &amp; Basic Trade Skills</div><div class="crit-desc">Competent with hand tools, basic steel fixing, formwork and concreting.</div></div>
+        <div class="scale" role="group" aria-label="Hand Tools & Basic Trade Skills" data-sec="skl" data-i="3"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Working Around Plant</div><div class="crit-desc">Safe and aware around rigs, excavators, concrete pumps and moving machinery.</div></div>
+        <div class="scale" role="group" aria-label="Working Around Plant" data-sec="skl" data-i="4"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Housekeeping &amp; Site Organisation</div><div class="crit-desc">Keeps the site clean, tidy and organised without being asked.</div></div>
+        <div class="scale" role="group" aria-label="Housekeeping & Site Organisation" data-sec="skl" data-i="5"></div>
+      </div>
+  </section>
+
+  <section>
+    <div class="sec-head ruled">
+      <div class="sec-num">03</div>
+      <h2>Experience</h2>
+      <span class="tag">20% of total score</span>
+      <div class="sec-tally">
+        <div class="sec-pts" id="exp-pts">&mdash;<span> / 20</span></div>
+        <div class="sec-avg" id="exp-avg">avg &mdash; / 10</div>
+      </div>
+    </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Construction &amp; Labouring Background</div><div class="crit-desc">Any relevant site, trades or hard physical work history.</div></div>
+        <div class="scale" role="group" aria-label="Construction & Labouring Background" data-sec="exp" data-i="0"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Piling, Civil or Groundworks Exposure</div><div class="crit-desc">Direct exposure to piling, civil or groundworks. A bonus, not a requirement.</div></div>
+        <div class="scale" role="group" aria-label="Piling, Civil or Groundworks Exposure" data-sec="exp" data-i="1"></div>
+      </div>
+      <div class="crit">
+        <div class="crit-label"><div class="crit-name">Reliability Track Record</div><div class="crit-desc">Work history shows they turn up, stay in jobs and finish what they start.</div></div>
+        <div class="scale" role="group" aria-label="Reliability Track Record" data-sec="exp" data-i="2"></div>
+      </div>
+  </section>
+
+  <section>
+    <div class="band" id="band">
+      <div>
+        <div class="band-kicker">Final score</div>
+        <div class="band-score" id="final">&mdash;<span> / 100</span></div>
+        <div class="band-sub" id="scored-line">0 of 15 criteria scored</div>
+      </div>
+      <div class="band-verdict">
+        <div class="band-title" id="verdict">Awaiting scores</div>
+        <div class="band-line" id="min-line">Minimum score not set yet</div>
+        <div class="band-line" id="gate-line">Mandatory gate not recorded yet</div>
+      </div>
+    </div>
+    <p class="band-foot">Mandatory gates and safety concerns override the number. A high score never outranks a failed gate or unsafe behaviour.</p>
+  </section>
+
+  <section>
+    <div class="sec-head ruled">
+      <div class="sec-num">04</div>
+      <h2>Best-fit stream</h2>
+      <span class="tag">Not scored</span>
+    </div>
+    <p class="sec-note">Where would this person start? Note your read after the interview or trial. It does not affect the score.</p>
+    <div class="crit">
+      <div class="crit-label"><div class="crit-name">Hand Piling</div><div class="crit-desc">Digging, site prep, basic steel fixing, concreting. The usual starting point with limited experience.</div></div>
+      <label class="seg-opt" style="border:1px solid var(--color-divider)"><input type="radio" name="stream" value="Hand Piling">Best fit</label>
+    </div>
+    <div class="crit">
+      <div class="crit-label"><div class="crit-name">Machine Piling</div><div class="crit-desc">Working in and around rigs, excavators and pumps. Pathway towards operating.</div></div>
+      <label class="seg-opt" style="border:1px solid var(--color-divider)"><input type="radio" name="stream" value="Machine Piling">Best fit</label>
+    </div>
+    <div class="crit">
+      <div class="crit-label"><div class="crit-name">Formwork &amp; Concrete</div><div class="crit-desc">Set-out, formwork, steel fixing and concreting. Suits good hands.</div></div>
+      <label class="seg-opt" style="border:1px solid var(--color-divider)"><input type="radio" name="stream" value="Formwork &amp; Concrete">Best fit</label>
+    </div>
+    <div class="crit">
+      <div class="crit-label"><div class="crit-name">Logistics &amp; Yard</div><div class="crit-desc">Loading plant, running materials between sites, keeping the yard in order.</div></div>
+      <label class="seg-opt" style="border:1px solid var(--color-divider)"><input type="radio" name="stream" value="Logistics &amp; Yard">Best fit</label>
+    </div>
+  </section>
+
+  <section class="guide">
+    <h2>Scoring guide</h2>
+    <div class="guide-grid">
+      <div class="guide-col-a">
+        <div class="eyebrow">What each score means</div>
+        <div class="table-wrap"><table>
+          <thead><tr><th style="width:64px">Score</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:600">0</td><td>Unacceptable or no evidence</td></tr>
+            <tr><td style="font-weight:600">2</td><td>Very weak</td></tr>
+            <tr><td style="font-weight:600">4</td><td>Below required standard</td></tr>
+            <tr><td style="font-weight:600">6</td><td>Competent and meets the standard</td></tr>
+            <tr><td style="font-weight:600">8</td><td>Strong</td></tr>
+            <tr><td style="font-weight:600">10</td><td>Exceptional. Should be rare</td></tr>
+          </tbody>
+        </table></div>
+        <p class="note">Odd numbers sit between the anchors. Whole numbers only, no half points.</p>
+      </div>
+      <div class="guide-col-b">
+        <div>
+          <div class="eyebrow">Minimum scores to hire</div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>Role type</th><th>Minimum final score</th></tr></thead>
+            <tbody>
+              <tr><td>General labouring</td><td>70 out of 100</td></tr>
+              <tr><td>Skilled and operator roles</td><td>80 out of 100 (any plant or equipment operator)</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div>
+          <div class="eyebrow">Overall guidance bands</div>
+          <div class="table-wrap"><table>
+            <tbody>
+              <tr><td style="font-weight:600;width:90px">85&ndash;100</td><td>Strong candidate</td></tr>
+              <tr><td style="font-weight:600">75&ndash;84</td><td>Progress if no significant concerns</td></tr>
+              <tr><td style="font-weight:600">65&ndash;74</td><td>Borderline</td></tr>
+              <tr><td style="font-weight:600">Below 65</td><td>Normally do not progress</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+      <div class="guide-col-full">
+        <div class="eyebrow">Rules</div>
+        <ul class="rules">
+          <li>Score evidence, not likeability. A likeable candidate is not automatically an 8.</li>
+          <li>Mandatory gates override the number. Gate failed means do not progress, whatever the score.</li>
+          <li>Safety concerns on trial override the number.</li>
+          <li>Scores evolve. Observed behaviour on trial carries more weight than anything written.</li>
+          <li>No extra weighting inside categories. Every criterion counts equally within its category.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Sydney Piling &mdash; internal hiring tool</span>
+    <a href="https://www.sydneypiling.au">sydneypiling.au</a>
+  </footer>
+</main>
+
+<script>
+(function () {
+  var KEY = "sp-scorecard-labourer-v1";
+  var COUNTS = { att: 6, skl: 6, exp: 3 };
+  var WEIGHTS = { att: 60, skl: 20, exp: 20 };
+  var DEFAULT_ROLE = "Piling Labourer";
+  var DEFAULT_MIN = 70;
+
+  function blank() {
+    return {
+      details: { name: '', role: DEFAULT_ROLE, assessor: '', date: '', stage: '' },
+      gate: null,
+      min: DEFAULT_MIN,
+      stream: null,
+      scores: { att: [null,null,null,null,null,null], skl: [null,null,null,null,null,null], exp: [null,null,null] }
+    };
+  }
+
+  var state = blank();
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY));
+    if (saved && saved.scores && saved.scores.att) state = saved;
+  } catch (e) {}
+
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  // Build the 0-10 scales.
+  Object.keys(COUNTS).forEach(function (sec) {
+    document.querySelectorAll('.scale[data-sec="' + sec + '"]').forEach(function (wrap) {
+      var i = Number(wrap.dataset.i);
+      var label = wrap.getAttribute('aria-label');
+      for (var v = 0; v <= 10; v++) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = String(v);
+        b.setAttribute('aria-label', label + ' \u2014 score ' + v);
+        b.setAttribute('aria-pressed', 'false');
+        b.dataset.v = String(v);
+        b.addEventListener('click', function (ev) {
+          var val = Number(ev.currentTarget.dataset.v);
+          state.scores[sec][i] = (state.scores[sec][i] === val) ? null : val;
+          save();
+          render();
+        });
+        wrap.appendChild(b);
+      }
+    });
+  });
+
+  document.querySelectorAll('input[data-d]').forEach(function (el) {
+    el.addEventListener('input', function () {
+      state.details[el.dataset.d] = el.value;
+      save();
+    });
+  });
+  document.querySelectorAll('input[name="gate"]').forEach(function (el) {
+    el.addEventListener('change', function () { state.gate = el.value; save(); render(); });
+  });
+  document.querySelectorAll('input[name="min"]').forEach(function (el) {
+    el.addEventListener('change', function () { state.min = Number(el.value); save(); render(); });
+  });
+  document.querySelectorAll('input[name="stream"]').forEach(function (el) {
+    el.addEventListener('change', function () { state.stream = el.value; save(); });
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    if (window.confirm('Clear all details and scores?')) { state = blank(); save(); render(); }
+  });
+
+  function stats(sec) {
+    var filled = state.scores[sec].filter(function (v) { return v !== null; });
+    if (!filled.length) return { avg: null, pts: null };
+    var sum = filled.reduce(function (a, b) { return a + b; }, 0);
+    var avg = Math.round((sum / filled.length) * 100) / 100;
+    return { avg: avg, pts: Math.round((avg / 10) * WEIGHTS[sec] * 1000) / 1000 };
+  }
+  function fmt(n) { return n === null ? '\u2014' : String(Math.round(n * 10) / 10); }
+
+  function render() {
+    document.querySelectorAll('input[data-d]').forEach(function (el) {
+      var v = state.details[el.dataset.d] || '';
+      if (el.value !== v) el.value = v;
+    });
+    document.querySelectorAll('input[name="gate"]').forEach(function (el) { el.checked = state.gate === el.value; });
+    document.querySelectorAll('input[name="min"]').forEach(function (el) { el.checked = state.min === Number(el.value); });
+    document.querySelectorAll('input[name="stream"]').forEach(function (el) { el.checked = state.stream === el.value; });
+
+    Object.keys(COUNTS).forEach(function (sec) {
+      document.querySelectorAll('.scale[data-sec="' + sec + '"]').forEach(function (wrap) {
+        var cur = state.scores[sec][Number(wrap.dataset.i)];
+        wrap.querySelectorAll('button').forEach(function (b) {
+          b.setAttribute('aria-pressed', Number(b.dataset.v) === cur ? 'true' : 'false');
+        });
+      });
+      var s = stats(sec);
+      document.getElementById(sec + '-pts').innerHTML = fmt(s.pts) + '<span> / ' + WEIGHTS[sec] + '</span>';
+      document.getElementById(sec + '-avg').textContent = 'avg ' + fmt(s.avg) + ' / 10';
+    });
+
+    var parts = [stats('att').pts, stats('skl').pts, stats('exp').pts].filter(function (p) { return p !== null; });
+    var final = parts.length ? Math.round(parts.reduce(function (a, b) { return a + b; }, 0) * 10) / 10 : null;
+    var all = state.scores.att.concat(state.scores.skl, state.scores.exp);
+    var scored = all.filter(function (v) { return v !== null; }).length;
+    var gateFailed = state.gate === 'no';
+
+    var verdict;
+    if (gateFailed) verdict = 'Do not progress \u2014 mandatory gate failed';
+    else if (final === null) verdict = 'Awaiting scores';
+    else if (final >= 85) verdict = 'Strong candidate';
+    else if (final >= 75) verdict = 'Progress if no significant concerns';
+    else if (final >= 65) verdict = 'Borderline';
+    else verdict = 'Normally do not progress';
+
+    document.getElementById('final').innerHTML = fmt(final) + '<span> / 100</span>';
+    document.getElementById('scored-line').textContent = scored + ' of ' + all.length + ' criteria scored';
+    document.getElementById('verdict').textContent = verdict;
+    document.getElementById('min-line').textContent =
+      state.min === null ? 'Minimum score not set yet'
+      : final === null ? 'Minimum to hire: ' + state.min + ' out of 100'
+      : final >= state.min ? 'Clears the ' + state.min + '-point minimum for this role'
+      : 'Below the ' + state.min + '-point minimum for this role';
+    document.getElementById('gate-line').textContent =
+      state.gate === 'yes' ? 'Mandatory experience gate met'
+      : state.gate === 'no' ? 'Mandatory experience gate not met'
+      : 'Mandatory gate not recorded yet';
+    document.getElementById('band').classList.toggle('failed', gateFailed);
+  }
+
+  render();
+})();
+</script>
