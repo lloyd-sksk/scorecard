@@ -86,6 +86,7 @@ main { max-width: 1100px; margin: 0 auto; padding: 0 28px 72px; }
 .seg-opt:has(input:checked) { background: var(--color-accent); color: var(--color-text); font-weight: 600; }
 .seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
 .seg-opt:has(input:focus-visible) { outline: 2px solid var(--color-accent-700); outline-offset: -2px; }
+.seg-opt input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
 .gate-note {
   margin: 8px 0 0; font-size: 13px; max-width: 72ch; text-wrap: pretty;
   color: color-mix(in srgb, var(--color-text) 62%, transparent);
@@ -434,6 +435,7 @@ footer a { font-size: 12px; margin-left: auto; }
       gate: null,
       min: DEFAULT_MIN,
       stream: null,
+      tickets: {},
       scores: { att: [null,null,null,null,null,null], skl: [null,null,null,null,null,null], exp: [null,null,null] }
     };
   }
@@ -484,6 +486,13 @@ footer a { font-size: 12px; margin-left: auto; }
   document.querySelectorAll('input[name="stream"]').forEach(function (el) {
     el.addEventListener('change', function () { state.stream = el.value; save(); });
   });
+  document.querySelectorAll('input[name="ticket"]').forEach(function (el) {
+    el.addEventListener('change', function () {
+      if (!state.tickets) state.tickets = {};
+      state.tickets[el.value] = el.checked;
+      save();
+    });
+  });
   document.getElementById('reset').addEventListener('click', function () {
     if (window.confirm('Clear all details and scores?')) { state = blank(); save(); render(); }
   });
@@ -505,6 +514,7 @@ footer a { font-size: 12px; margin-left: auto; }
     document.querySelectorAll('input[name="gate"]').forEach(function (el) { el.checked = state.gate === el.value; });
     document.querySelectorAll('input[name="min"]').forEach(function (el) { el.checked = state.min === Number(el.value); });
     document.querySelectorAll('input[name="stream"]').forEach(function (el) { el.checked = state.stream === el.value; });
+    document.querySelectorAll('input[name="ticket"]').forEach(function (el) { el.checked = !!(state.tickets && state.tickets[el.value]); });
 
     Object.keys(COUNTS).forEach(function (sec) {
       document.querySelectorAll('.scale[data-sec="' + sec + '"]').forEach(function (wrap) {
