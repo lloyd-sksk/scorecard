@@ -178,19 +178,88 @@ footer a { font-size: 12px; margin-left: auto; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* — multi-assessor additions — */
+.scale button.na {
+  width: 46px; font-size: 12px; letter-spacing: 0.02em;
+  border-right: 1px solid var(--color-divider);
+}
+.scale button.na[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--color-text) 24%, transparent); color: var(--color-text); font-weight: 800;
+}
+.crit.na-set .crit-name { opacity: 0.55; }
+
+.warn {
+  margin: 10px 0 0; padding: 10px 14px; font-size: 13px; max-width: 78ch;
+  background: var(--color-accent-100); border-left: 3px solid var(--color-accent-600);
+}
+
+.decision { padding: 26px 0 0; }
+.dec-grid { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: flex-start; }
+.dec-opts { display: flex; flex-wrap: wrap; border: 1px solid var(--color-divider); }
+textarea.input { min-height: 84px; resize: vertical; font-family: inherit; }
+
+.submit-bar {
+  display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center;
+  margin-top: 26px; padding: 20px 22px; background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+}
+.btn-primary {
+  background: var(--color-accent); border-color: var(--color-accent);
+  font-size: 15px; padding: 11px 22px;
+}
+.btn-primary:hover { background: var(--color-accent-600); border-color: var(--color-accent-600); }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; background: var(--color-accent); }
+.submit-msg { font-size: 13px; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+.submit-msg.ok { color: var(--color-accent-800); font-weight: 600; }
+.submit-msg.bad { color: #a11b0b; font-weight: 600; }
+
+.report { border-top: 2px solid var(--color-divider); margin-top: 44px; padding-top: 26px; }
+.report h2 { font-size: 26px; margin: 0 0 6px; }
+.rep-controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; margin: 16px 0 22px; }
+select.input { appearance: none; padding-right: 30px; background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%); background-position: right 14px center, right 9px center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; }
+
+.rep-summary {
+  display: flex; flex-wrap: wrap; gap: 24px 56px; align-items: flex-end;
+  padding: 28px 30px; background: var(--color-accent); color: var(--color-text);
+}
+.rep-summary.thin { background: var(--color-surface); }
+.rep-big {
+  font-family: var(--font-heading); font-weight: 800; font-size: 66px; line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+.rep-big span { font-size: 18px; font-weight: 600; }
+.rep-cols { display: flex; flex-wrap: wrap; gap: 18px 40px; }
+.rep-stat { font-variant-numeric: tabular-nums; }
+.rep-stat-v { font-family: var(--font-heading); font-weight: 800; font-size: 22px; line-height: 1.1; }
+.rep-stat-l { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.65; }
+
+.spread { color: #a11b0b; font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.empty-state {
+  padding: 28px 30px; background: var(--color-surface); font-size: 14px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent); max-width: 78ch;
+}
+.btn-tiny { font-size: 12px; padding: 4px 9px; font-weight: 600; }
+
+.code-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; max-width: 760px; }
+.code-box {
+  flex: 1 1 320px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px; background: var(--color-bg);
+}
 </style>
 
 <nav class="nav">
   <img src="data:image/png;base64,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" alt="Sydney Piling">
   <span class="nav-note">Internal hiring tool</span>
-  <button type="button" class="btn" id="reset">Reset form</button>
+  <button type="button" class="btn" id="reset">Clear my draft</button>
 </nav>
 
 <main>
   <header class="page-head">
     <div class="kicker">Recruitment</div>
     <h1>Rig Offsider Scorecard</h1>
-    <p>Score every criterion 0 to 10, whole numbers only. Tap a number to score it, tap again to clear. Totals, weighting and the result calculate themselves.</p>
+    <p>Each assessor fills in their own scorecard and gets a short code at the end. Send the code to whoever is collecting them, paste the codes into the combine box at the bottom, and the averages work themselves out.</p>
   </header>
 
   <section class="details">
@@ -201,12 +270,12 @@ footer a { font-size: 12px; margin-left: auto; }
       <div class="field" style="flex:1 1 160px"><label for="f-date">Date</label><input class="input" id="f-date" data-d="date" type="date"></div>
     </div>
     <div class="row">
-      <div class="field" style="flex:1 1 240px"><label for="f-assessor">Assessor</label><input class="input" id="f-assessor" data-d="assessor" placeholder="Who is scoring"></div>
+      <div class="field" style="flex:1 1 240px"><label for="f-assessor">Your name</label><input class="input" id="f-assessor" data-d="assessor" placeholder="Who is scoring"></div>
       <div class="field" style="flex:1 1 240px"><label for="f-stage">Stage</label><input class="input" id="f-stage" data-d="stage" placeholder="Interview / Reference / Trial"></div>
     </div>
     <div class="row" style="gap:16px 40px">
       <div class="field">
-        <label>Mandatory experience gate met?</label>
+        <label>Mandatory gate met?</label>
         <div class="seg" role="radiogroup" aria-label="Mandatory gate met">
           <label class="seg-opt"><input type="radio" name="gate" value="yes">Yes</label>
           <label class="seg-opt"><input type="radio" name="gate" value="no">No</label>
@@ -220,7 +289,7 @@ footer a { font-size: 12px; margin-left: auto; }
         </div>
       </div>
     </div>
-    <p class="gate-note"><strong>Gate for this role:</strong> Current EWP and dogman tickets, both essential. Physically strong, and able to spend the day on their feet in clear view of a moving rig. Reports to the Piling Supervisor.</p>
+    <p class="gate-note"><strong>Gate for this role:</strong> physically strong, able to spend the day on their feet in clear view of a moving rig, and holds or can obtain before starting the tickets the role requires. Confirm the ticket list with the Piling Supervisor before treating a missing ticket as a gate failure.</p>
   </section>
 
   <section>
@@ -233,30 +302,8 @@ footer a { font-size: 12px; margin-left: auto; }
         <div class="sec-avg" id="att-avg">avg &mdash; / 10</div>
       </div>
     </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Determination &amp; Work Ethic</div><div class="crit-desc">Works hard, takes ownership and gets stuck in.</div></div>
-        <div class="scale" role="group" aria-label="Determination & Work Ethic" data-sec="att" data-i="0"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Respect &amp; Manners</div><div class="crit-desc">Communicates respectfully with clients, suppliers, management and teammates.</div></div>
-        <div class="scale" role="group" aria-label="Respect & Manners" data-sec="att" data-i="1"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Organisation &amp; Reliability</div><div class="crit-desc">Punctual, prepared, organised and dependable.</div></div>
-        <div class="scale" role="group" aria-label="Organisation & Reliability" data-sec="att" data-i="2"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Team Fit / No-Dickhead Policy</div><div class="crit-desc">Easy to work with, no unnecessary ego, helps the wider team.</div></div>
-        <div class="scale" role="group" aria-label="Team Fit / No-Dickhead Policy" data-sec="att" data-i="3"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Respect for Structure &amp; Leadership</div><div class="crit-desc">Follows instructions, uses correct channels, respects leadership roles.</div></div>
-        <div class="scale" role="group" aria-label="Respect for Structure & Leadership" data-sec="att" data-i="4"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Commitment to Learning &amp; Improvement</div><div class="crit-desc">Open to feedback, willing to learn and become better at the role.</div></div>
-        <div class="scale" role="group" aria-label="Commitment to Learning & Improvement" data-sec="att" data-i="5"></div>
-      </div>
+    <div id="att-rows"></div>
+    <div class="warn" id="att-warn" hidden></div>
   </section>
 
   <section>
@@ -269,31 +316,9 @@ footer a { font-size: 12px; margin-left: auto; }
         <div class="sec-avg" id="skl-avg">avg &mdash; / 10</div>
       </div>
     </div>
-    <p class="sec-note">Criteria below are set for the Piling Offsider role. The offsider is the eyes and ears for the rig operator, so spotting and communication carry the most weight of the six.</p>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Spotting &amp; Rig Awareness</div><div class="crit-desc">Keeps the rig clear of strikes, stays in the operator&rsquo;s view and positions themselves safely.</div></div>
-        <div class="scale" role="group" aria-label="Spotting & Rig Awareness" data-sec="skl" data-i="0"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Communication &amp; Hand Signals</div><div class="crit-desc">Clear, constant radio and hand signal communication with the operator and crew.</div></div>
-        <div class="scale" role="group" aria-label="Communication & Hand Signals" data-sec="skl" data-i="1"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Rig Set-Up &amp; Auger Handling</div><div class="crit-desc">Erects the rig without damaging hydraulics or winches, fits augers, connects concrete hoses.</div></div>
-        <div class="scale" role="group" aria-label="Rig Set-Up & Auger Handling" data-sec="skl" data-i="2"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Concrete Line Priming &amp; Pour Support</div><div class="crit-desc">Protects the surrounds when priming, digs to the auger to relieve pressure, helps place cages.</div></div>
-        <div class="scale" role="group" aria-label="Concrete Line Priming & Pour Support" data-sec="skl" data-i="3"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Machinery Checks &amp; Consumables</div><div class="crit-desc">Fuel levels, auger teeth condition, clean auger head, diesel spray on the rig.</div></div>
-        <div class="scale" role="group" aria-label="Machinery Checks & Consumables" data-sec="skl" data-i="4"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Site Prep, Housekeeping &amp; Materials</div><div class="crit-desc">Site set-up, road boards, materials on hand, waste disposed of, site left clean.</div></div>
-        <div class="scale" role="group" aria-label="Site Prep, Housekeeping & Materials" data-sec="skl" data-i="5"></div>
-      </div>
+    <p class="sec-note">Criteria below are set for the Piling Offsider role. The offsider is the eyes and ears for the rig operator, so spotting and communication matter most. Use <strong>N/A</strong> where you had no chance to see it, rather than scoring 0.</p>
+    <div id="skl-rows"></div>
+    <div class="warn" id="skl-warn" hidden></div>
   </section>
 
   <section>
@@ -306,26 +331,16 @@ footer a { font-size: 12px; margin-left: auto; }
         <div class="sec-avg" id="exp-avg">avg &mdash; / 10</div>
       </div>
     </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Piling Site Experience</div><div class="crit-desc">Time spent on piling sites and around rigs, augers and concrete lines.</div></div>
-        <div class="scale" role="group" aria-label="Piling Site Experience" data-sec="exp" data-i="0"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Plant &amp; Machinery Exposure</div><div class="crit-desc">Working around rigs, excavators, floats, concrete pumps and moving plant.</div></div>
-        <div class="scale" role="group" aria-label="Plant & Machinery Exposure" data-sec="exp" data-i="1"></div>
-      </div>
-      <div class="crit">
-        <div class="crit-label"><div class="crit-name">Steel Fixing &amp; Concreting</div><div class="crit-desc">Cage making, tie wire and pours. Desirable, not essential.</div></div>
-        <div class="scale" role="group" aria-label="Steel Fixing & Concreting" data-sec="exp" data-i="2"></div>
-      </div>
+    <div id="exp-rows"></div>
+    <div class="warn" id="exp-warn" hidden></div>
   </section>
 
   <section>
     <div class="band" id="band">
       <div>
-        <div class="band-kicker">Final score</div>
+        <div class="band-kicker">Your score</div>
         <div class="band-score" id="final">&mdash;<span> / 100</span></div>
-        <div class="band-sub" id="scored-line">0 of 15 criteria scored</div>
+        <div class="band-sub" id="scored-line">Nothing scored yet</div>
       </div>
       <div class="band-verdict">
         <div class="band-title" id="verdict">Awaiting scores</div>
@@ -333,7 +348,7 @@ footer a { font-size: 12px; margin-left: auto; }
         <div class="band-line" id="gate-line">Mandatory gate not recorded yet</div>
       </div>
     </div>
-    <p class="band-foot">Mandatory gates and safety concerns override the number. A high score never outranks a failed gate or unsafe behaviour.</p>
+    <p class="band-foot">The number is guidance, not the decision. Mandatory gates and safety concerns override it, and a low score on a trainable candidate is a reason to record a different recommendation below, not an automatic rejection.</p>
   </section>
 
   <section>
@@ -342,35 +357,67 @@ footer a { font-size: 12px; margin-left: auto; }
       <h2>Tickets held</h2>
       <span class="tag">Not scored</span>
     </div>
-    <p class="sec-note">Tick what they hold and sight the card. The two essential tickets are part of the mandatory gate above, so a missing one is a gate failure, not a lost point.</p>
-    <div class="crit">
-      <div class="crit-label"><div class="crit-name">EWP &mdash; Elevated Work Platform</div><div class="crit-desc">Essential</div></div>
-      <label class="seg-opt tick" style="border:1px solid var(--color-divider)"><input type="checkbox" name="ticket" value="EWP — Elevated Work Platform">Sighted</label>
+    <p class="sec-note">Tick what you have sighted. Confirm with the Piling Supervisor which of these the role actually requires before treating a gap as a gate failure.</p>
+    <div id="tkt-rows"></div>
+  </section>
+
+  <section class="decision">
+    <div class="sec-head ruled">
+      <div class="sec-num">05</div>
+      <h2>Your recommendation</h2>
+      <span class="tag">Required</span>
     </div>
-    <div class="crit">
-      <div class="crit-label"><div class="crit-name">Dogman</div><div class="crit-desc">Essential</div></div>
-      <label class="seg-opt tick" style="border:1px solid var(--color-divider)"><input type="checkbox" name="ticket" value="Dogman">Sighted</label>
+    <p class="sec-note">This is the part that decides what happens. Score the evidence above, then make the call here.</p>
+    <div class="dec-grid">
+      <div class="field" style="flex:1 1 100%">
+        <label>Recommendation</label>
+        <div class="dec-opts" role="radiogroup" aria-label="Recommendation">
+          <label class="seg-opt"><input type="radio" name="dec" value="progress">Progress to this role</label>
+          <label class="seg-opt"><input type="radio" name="dec" value="train">Train into the role</label>
+          <label class="seg-opt"><input type="radio" name="dec" value="other">Offer a different role</label>
+          <label class="seg-opt"><input type="radio" name="dec" value="no">Do not progress</label>
+        </div>
+      </div>
+      <div class="field" style="flex:1 1 100%">
+        <label for="f-notes">Notes (what you saw, what you could not assess, what they need to work on)</label>
+        <textarea class="input" id="f-notes" data-d="notes" placeholder="Keep it short and factual."></textarea>
+      </div>
     </div>
-    <div class="crit">
-      <div class="crit-label"><div class="crit-name">C6 Crane</div><div class="crit-desc">Desirable</div></div>
-      <label class="seg-opt tick" style="border:1px solid var(--color-divider)"><input type="checkbox" name="ticket" value="C6 Crane">Sighted</label>
+
+    <div class="submit-bar">
+      <button type="button" class="btn btn-primary" id="submit">Finish and get my code</button>
+      <span class="submit-msg" id="submit-msg">Your answers save automatically on this device. Finishing turns them into a code you can send on.</span>
     </div>
-    <div class="crit">
-      <div class="crit-label"><div class="crit-name">Basic Rigging</div><div class="crit-desc">Desirable</div></div>
-      <label class="seg-opt tick" style="border:1px solid var(--color-divider)"><input type="checkbox" name="ticket" value="Basic Rigging">Sighted</label>
+    <div id="code-out" hidden>
+      <div class="eyebrow" style="margin-top:24px">Your code</div>
+      <p class="note" style="margin:0 0 10px">Send this to whoever is collecting the assessments. Text, WhatsApp or email, it does not matter.</p>
+      <div class="code-row">
+        <input class="input code-box" id="code-val" readonly>
+        <button type="button" class="btn" id="code-copy">Copy</button>
+      </div>
+      <p class="note" id="code-note"></p>
     </div>
-    <div class="crit">
-      <div class="crit-label"><div class="crit-name">Confined Space</div><div class="crit-desc">Desirable</div></div>
-      <label class="seg-opt tick" style="border:1px solid var(--color-divider)"><input type="checkbox" name="ticket" value="Confined Space">Sighted</label>
+  </section>
+
+  <section class="report">
+    <h2>Combine assessments</h2>
+    <p class="sec-note">Paste the codes you have been sent, one per line, and press Add. They stay on this device until you clear them.</p>
+    <div class="field" style="margin-bottom:12px">
+      <label for="code-in">Codes</label>
+      <textarea class="input" id="code-in" placeholder="SPO-..." style="min-height:70px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px"></textarea>
     </div>
-    <div class="crit">
-      <div class="crit-label"><div class="crit-name">B80 Concrete Pouring Grey Card</div><div class="crit-desc">Desirable</div></div>
-      <label class="seg-opt tick" style="border:1px solid var(--color-divider)"><input type="checkbox" name="ticket" value="B80 Concrete Pouring Grey Card">Sighted</label>
+    <div class="rep-controls" style="margin-top:0">
+      <button type="button" class="btn btn-primary" id="code-add">Add codes</button>
+      <span class="submit-msg" id="add-msg"></span>
     </div>
-    <div class="crit">
-      <div class="crit-label"><div class="crit-name">Asbestos Awareness Training</div><div class="crit-desc">Desirable</div></div>
-      <label class="seg-opt tick" style="border:1px solid var(--color-divider)"><input type="checkbox" name="ticket" value="Asbestos Awareness Training">Sighted</label>
+    <div class="rep-controls">
+      <div class="field" style="flex:1 1 280px">
+        <label for="rep-pick">Candidate</label>
+        <select class="input" id="rep-pick"></select>
+      </div>
+      <button type="button" class="btn" id="rep-clear">Clear all collected</button>
     </div>
+    <div id="rep-body"></div>
   </section>
 
   <section class="guide">
@@ -381,7 +428,8 @@ footer a { font-size: 12px; margin-left: auto; }
         <div class="table-wrap"><table>
           <thead><tr><th style="width:64px">Score</th><th>Meaning</th></tr></thead>
           <tbody>
-            <tr><td style="font-weight:600">0</td><td>Unacceptable or no evidence</td></tr>
+            <tr><td style="font-weight:600">N/A</td><td>Cannot comment. You had no chance to see it. Left out of the average entirely</td></tr>
+            <tr><td style="font-weight:600">0</td><td>Seen and unacceptable. Not the same as unseen</td></tr>
             <tr><td style="font-weight:600">2</td><td>Very weak</td></tr>
             <tr><td style="font-weight:600">4</td><td>Below required standard</td></tr>
             <tr><td style="font-weight:600">6</td><td>Competent and meets the standard</td></tr>
@@ -409,7 +457,7 @@ footer a { font-size: 12px; margin-left: auto; }
               <tr><td style="font-weight:600;width:90px">85&ndash;100</td><td>Strong candidate</td></tr>
               <tr><td style="font-weight:600">75&ndash;84</td><td>Progress if no significant concerns</td></tr>
               <tr><td style="font-weight:600">65&ndash;74</td><td>Borderline</td></tr>
-              <tr><td style="font-weight:600">Below 65</td><td>Normally do not progress</td></tr>
+              <tr><td style="font-weight:600">Below 65</td><td>Below the bar for this role today. Still a candidate for training or a different role</td></tr>
             </tbody>
           </table></div>
         </div>
@@ -418,9 +466,10 @@ footer a { font-size: 12px; margin-left: auto; }
         <div class="eyebrow">Rules</div>
         <ul class="rules">
           <li>Score evidence, not likeability. A likeable candidate is not automatically an 8.</li>
+          <li>Use N/A when you had no chance to see something. A 0 means you saw it and it was unacceptable.</li>
           <li>Mandatory gates override the number. Gate failed means do not progress, whatever the score.</li>
           <li>Safety concerns on trial override the number.</li>
-          <li>Scores evolve. Observed behaviour on trial carries more weight than anything written.</li>
+          <li>A score below the minimum is not an automatic rejection. Record the right recommendation.</li>
           <li>No extra weighting inside categories. Every criterion counts equally within its category.</li>
         </ul>
       </div>
@@ -435,58 +484,171 @@ footer a { font-size: 12px; margin-left: auto; }
 
 <script>
 (function () {
-  var KEY = "sp-scorecard-rig-offsider-v1";
-  var COUNTS = { att: 6, skl: 6, exp: 3 };
+  var KEY = 'sp-scorecard-rig-offsider-v2';
   var WEIGHTS = { att: 60, skl: 20, exp: 20 };
-  var DEFAULT_ROLE = "Piling Offsider";
+  var SECTIONS = ['att', 'skl', 'exp'];
+  var DEFAULT_ROLE = 'Piling Offsider';
   var DEFAULT_MIN = 70;
+
+  var CRITERIA = {
+    att: [
+      ['Determination & Work Ethic', 'Works hard, takes ownership and gets stuck in.'],
+      ['Respect & Manners', 'Communicates respectfully with clients, suppliers, management and teammates.'],
+      ['Organisation & Reliability', 'Punctual, prepared, organised and dependable.'],
+      ['Team Fit / No-Dickhead Policy', 'Easy to work with, no unnecessary ego, helps the wider team.'],
+      ['Respect for Structure & Leadership', 'Follows instructions, uses correct channels, respects leadership roles.'],
+      ['Commitment to Learning & Improvement', 'Open to feedback, willing to learn and become better at the role.']
+    ],
+    skl: [
+      ['Spotting & Rig Awareness', "Keeps the rig clear of strikes, stays in the operator's view and positions themselves safely."],
+      ['Communication & Hand Signals', 'Clear, constant radio and hand signal communication with the operator and crew.'],
+      ['Rig Set-Up & Auger Handling', 'Erects the rig without damaging hydraulics or winches, fits augers, connects concrete hoses.'],
+      ['Concrete Line Priming & Pour Support', 'Protects the surrounds when priming, digs to the auger to relieve pressure, helps place cages.'],
+      ['Machinery Checks & Consumables', 'Fuel levels, auger teeth condition, clean auger head, diesel spray on the rig.'],
+      ['Site Prep, Housekeeping & Materials', 'Site set-up, road boards, materials on hand, waste disposed of, site left clean.']
+    ],
+    exp: [
+      ['Piling Site Experience', 'Time spent on piling sites and around rigs, augers and concrete lines.'],
+      ['Plant & Machinery Exposure', 'Working around rigs, excavators, floats, concrete pumps and moving plant.'],
+      ['Steel Fixing & Concreting', 'Cage making, tie wire and pours. Desirable, not essential.']
+    ]
+  };
+
+  var TICKETS = [
+    ['EWP — Elevated Work Platform', 'Listed essential in the position description'],
+    ['Dogman', 'Listed essential in the position description'],
+    ['C6 Crane', 'Desirable'],
+    ['Basic Rigging', 'Desirable'],
+    ['Confined Space', 'Desirable'],
+    ['B80 Concrete Pouring Grey Card', 'Desirable'],
+    ['Asbestos Awareness Training', 'Desirable']
+  ];
+
+  var DEC_LABEL = {
+    progress: 'Progress to this role',
+    train: 'Train into the role',
+    other: 'Offer a different role',
+    no: 'Do not progress'
+  };
 
   function blank() {
     return {
-      details: { name: '', role: DEFAULT_ROLE, assessor: '', date: '', stage: '' },
+      details: { name: '', role: DEFAULT_ROLE, assessor: '', date: '', stage: '', notes: '' },
       gate: null,
       min: DEFAULT_MIN,
-      stream: null,
+      decision: null,
       tickets: {},
-      scores: { att: [null,null,null,null,null,null], skl: [null,null,null,null,null,null], exp: [null,null,null] }
+      scores: { att: [null, null, null, null, null, null], skl: [null, null, null, null, null, null], exp: [null, null, null] }
     };
   }
 
   var state = blank();
   try {
     var saved = JSON.parse(localStorage.getItem(KEY));
-    if (saved && saved.scores && saved.scores.att) state = saved;
+    if (saved && saved.scores && saved.scores.att) state = Object.assign(blank(), saved);
   } catch (e) {}
 
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
 
-  // Build the 0-10 scales.
-  Object.keys(COUNTS).forEach(function (sec) {
-    document.querySelectorAll('.scale[data-sec="' + sec + '"]').forEach(function (wrap) {
-      var i = Number(wrap.dataset.i);
-      var label = wrap.getAttribute('aria-label');
-      for (var v = 0; v <= 10; v++) {
+  // ---------- build the criterion rows ----------
+  function buildRows(sec) {
+    var host = document.getElementById(sec + '-rows');
+    CRITERIA[sec].forEach(function (c, i) {
+      var row = document.createElement('div');
+      row.className = 'crit';
+      row.dataset.sec = sec;
+      row.dataset.i = String(i);
+
+      var label = document.createElement('div');
+      label.className = 'crit-label';
+      var nm = document.createElement('div');
+      nm.className = 'crit-name';
+      nm.textContent = c[0];
+      var ds = document.createElement('div');
+      ds.className = 'crit-desc';
+      ds.textContent = c[1];
+      label.appendChild(nm);
+      label.appendChild(ds);
+
+      var scale = document.createElement('div');
+      scale.className = 'scale';
+      scale.setAttribute('role', 'group');
+      scale.setAttribute('aria-label', c[0]);
+
+      var vals = ['na'];
+      for (var v = 0; v <= 10; v++) vals.push(v);
+      vals.forEach(function (val) {
         var b = document.createElement('button');
         b.type = 'button';
-        b.textContent = String(v);
-        b.setAttribute('aria-label', label + ' \u2014 score ' + v);
+        b.dataset.v = String(val);
+        if (val === 'na') {
+          b.className = 'na';
+          b.textContent = 'N/A';
+          b.setAttribute('aria-label', c[0] + ' — cannot comment');
+        } else {
+          b.textContent = String(val);
+          b.setAttribute('aria-label', c[0] + ' — score ' + val);
+        }
         b.setAttribute('aria-pressed', 'false');
-        b.dataset.v = String(v);
-        b.addEventListener('click', function (ev) {
-          var val = Number(ev.currentTarget.dataset.v);
-          state.scores[sec][i] = (state.scores[sec][i] === val) ? null : val;
+        b.addEventListener('click', function () {
+          var next = (val === 'na') ? 'na' : Number(val);
+          state.scores[sec][i] = (state.scores[sec][i] === next) ? null : next;
           save();
           render();
         });
-        wrap.appendChild(b);
-      }
-    });
-  });
+        scale.appendChild(b);
+      });
 
-  document.querySelectorAll('input[data-d]').forEach(function (el) {
+      row.appendChild(label);
+      row.appendChild(scale);
+      host.appendChild(row);
+    });
+  }
+  SECTIONS.forEach(buildRows);
+
+  // ---------- tickets ----------
+  (function buildTickets() {
+    var host = document.getElementById('tkt-rows');
+    TICKETS.forEach(function (t) {
+      var row = document.createElement('div');
+      row.className = 'crit';
+      var label = document.createElement('div');
+      label.className = 'crit-label';
+      var nm = document.createElement('div');
+      nm.className = 'crit-name';
+      nm.textContent = t[0];
+      var ds = document.createElement('div');
+      ds.className = 'crit-desc';
+      ds.textContent = t[1];
+      label.appendChild(nm);
+      label.appendChild(ds);
+
+      var wrap = document.createElement('label');
+      wrap.className = 'seg-opt';
+      wrap.style.border = '1px solid var(--color-divider)';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.name = 'ticket';
+      cb.value = t[0];
+      cb.addEventListener('change', function () {
+        state.tickets[t[0]] = cb.checked;
+        save();
+      });
+      wrap.appendChild(cb);
+      wrap.appendChild(document.createTextNode('Sighted'));
+
+      row.appendChild(label);
+      row.appendChild(wrap);
+      host.appendChild(row);
+    });
+  })();
+
+  // ---------- inputs ----------
+  document.querySelectorAll('[data-d]').forEach(function (el) {
     el.addEventListener('input', function () {
       state.details[el.dataset.d] = el.value;
       save();
+      if (el.dataset.d === 'name') syncReportPick();
     });
   });
   document.querySelectorAll('input[name="gate"]').forEach(function (el) {
@@ -495,80 +657,468 @@ footer a { font-size: 12px; margin-left: auto; }
   document.querySelectorAll('input[name="min"]').forEach(function (el) {
     el.addEventListener('change', function () { state.min = Number(el.value); save(); render(); });
   });
-  document.querySelectorAll('input[name="stream"]').forEach(function (el) {
-    el.addEventListener('change', function () { state.stream = el.value; save(); });
-  });
-  document.querySelectorAll('input[name="ticket"]').forEach(function (el) {
-    el.addEventListener('change', function () {
-      if (!state.tickets) state.tickets = {};
-      state.tickets[el.value] = el.checked;
-      save();
-    });
+  document.querySelectorAll('input[name="dec"]').forEach(function (el) {
+    el.addEventListener('change', function () { state.decision = el.value; save(); render(); });
   });
   document.getElementById('reset').addEventListener('click', function () {
-    if (window.confirm('Clear all details and scores?')) { state = blank(); save(); render(); }
+    if (window.confirm('Clear your draft on this device? Assessments already submitted to the report are not affected.')) {
+      state = blank();
+      save();
+      render();
+    }
   });
 
-  function stats(sec) {
-    var filled = state.scores[sec].filter(function (v) { return v !== null; });
-    if (!filled.length) return { avg: null, pts: null };
-    var sum = filled.reduce(function (a, b) { return a + b; }, 0);
-    var avg = Math.round((sum / filled.length) * 100) / 100;
-    return { avg: avg, pts: Math.round((avg / 10) * WEIGHTS[sec] * 1000) / 1000 };
+  // ---------- maths ----------
+  function stats(sec, scores) {
+    var arr = (scores && scores[sec]) || [];
+    var nums = arr.filter(function (v) { return typeof v === 'number'; });
+    var na = arr.filter(function (v) { return v === 'na'; }).length;
+    var blankCount = arr.length - nums.length - na;
+    if (!nums.length) return { avg: null, pts: null, scored: 0, na: na, blank: blankCount, total: arr.length };
+    var sum = nums.reduce(function (a, b) { return a + b; }, 0);
+    var avg = Math.round((sum / nums.length) * 100) / 100;
+    return {
+      avg: avg,
+      pts: Math.round((avg / 10) * WEIGHTS[sec] * 1000) / 1000,
+      scored: nums.length, na: na, blank: blankCount, total: arr.length
+    };
   }
-  function fmt(n) { return n === null ? '\u2014' : String(Math.round(n * 10) / 10); }
 
+  function overall(scores) {
+    var per = {};
+    var parts = [];
+    var scored = 0, na = 0, blank = 0, total = 0;
+    SECTIONS.forEach(function (sec) {
+      var s = stats(sec, scores);
+      per[sec] = s;
+      if (s.pts !== null) parts.push(s.pts);
+      scored += s.scored; na += s.na; blank += s.blank; total += s.total;
+    });
+    var final = parts.length === SECTIONS.length
+      ? Math.round(parts.reduce(function (a, b) { return a + b; }, 0) * 10) / 10
+      : null;
+    return { per: per, final: final, scored: scored, na: na, blank: blank, total: total };
+  }
+
+  function verdictFor(final, gateFailed) {
+    if (gateFailed) return 'Do not progress — mandatory gate failed';
+    if (final === null) return 'Awaiting scores';
+    if (final >= 85) return 'Strong candidate';
+    if (final >= 75) return 'Progress if no significant concerns';
+    if (final >= 65) return 'Borderline';
+    return 'Below the bar for this role today';
+  }
+
+  function fmt(n) { return (n === null || n === undefined) ? '—' : String(Math.round(n * 10) / 10); }
+
+  // ---------- render ----------
   function render() {
-    document.querySelectorAll('input[data-d]').forEach(function (el) {
+    document.querySelectorAll('[data-d]').forEach(function (el) {
       var v = state.details[el.dataset.d] || '';
       if (el.value !== v) el.value = v;
     });
     document.querySelectorAll('input[name="gate"]').forEach(function (el) { el.checked = state.gate === el.value; });
     document.querySelectorAll('input[name="min"]').forEach(function (el) { el.checked = state.min === Number(el.value); });
-    document.querySelectorAll('input[name="stream"]').forEach(function (el) { el.checked = state.stream === el.value; });
-    document.querySelectorAll('input[name="ticket"]').forEach(function (el) { el.checked = !!(state.tickets && state.tickets[el.value]); });
+    document.querySelectorAll('input[name="dec"]').forEach(function (el) { el.checked = state.decision === el.value; });
+    document.querySelectorAll('input[name="ticket"]').forEach(function (el) { el.checked = !!state.tickets[el.value]; });
 
-    Object.keys(COUNTS).forEach(function (sec) {
-      document.querySelectorAll('.scale[data-sec="' + sec + '"]').forEach(function (wrap) {
-        var cur = state.scores[sec][Number(wrap.dataset.i)];
-        wrap.querySelectorAll('button').forEach(function (b) {
-          b.setAttribute('aria-pressed', Number(b.dataset.v) === cur ? 'true' : 'false');
-        });
+    document.querySelectorAll('.crit[data-sec]').forEach(function (row) {
+      var cur = state.scores[row.dataset.sec][Number(row.dataset.i)];
+      row.classList.toggle('na-set', cur === 'na');
+      row.querySelectorAll('.scale button').forEach(function (b) {
+        var val = b.dataset.v === 'na' ? 'na' : Number(b.dataset.v);
+        b.setAttribute('aria-pressed', val === cur ? 'true' : 'false');
       });
-      var s = stats(sec);
-      document.getElementById(sec + '-pts').innerHTML = fmt(s.pts) + '<span> / ' + WEIGHTS[sec] + '</span>';
-      document.getElementById(sec + '-avg').textContent = 'avg ' + fmt(s.avg) + ' / 10';
     });
 
-    var parts = [stats('att').pts, stats('skl').pts, stats('exp').pts].filter(function (p) { return p !== null; });
-    var final = parts.length ? Math.round(parts.reduce(function (a, b) { return a + b; }, 0) * 10) / 10 : null;
-    var all = state.scores.att.concat(state.scores.skl, state.scores.exp);
-    var scored = all.filter(function (v) { return v !== null; }).length;
+    var o = overall(state.scores);
+
+    SECTIONS.forEach(function (sec) {
+      var s = o.per[sec];
+      document.getElementById(sec + '-pts').innerHTML = fmt(s.pts) + '<span> / ' + WEIGHTS[sec] + '</span>';
+      document.getElementById(sec + '-avg').textContent =
+        'avg ' + fmt(s.avg) + ' / 10' + (s.na ? ' · ' + s.na + ' N/A' : '');
+      var warn = document.getElementById(sec + '-warn');
+      if (s.scored === 0 && s.na > 0) {
+        warn.hidden = false;
+        warn.textContent = 'Every criterion in this section is marked N/A, so it cannot contribute a score. The final score stays blank until each section has at least one real score.';
+      } else if (s.scored > 0 && s.scored < Math.ceil(s.total / 2)) {
+        warn.hidden = false;
+        warn.textContent = 'Only ' + s.scored + ' of ' + s.total + ' criteria scored here. Treat this section as a weak signal and say so in your notes.';
+      } else {
+        warn.hidden = true;
+      }
+    });
+
     var gateFailed = state.gate === 'no';
+    document.getElementById('final').innerHTML = fmt(o.final) + '<span> / 100</span>';
 
-    var verdict;
-    if (gateFailed) verdict = 'Do not progress \u2014 mandatory gate failed';
-    else if (final === null) verdict = 'Awaiting scores';
-    else if (final >= 85) verdict = 'Strong candidate';
-    else if (final >= 75) verdict = 'Progress if no significant concerns';
-    else if (final >= 65) verdict = 'Borderline';
-    else verdict = 'Normally do not progress';
+    var line;
+    if (o.scored === 0 && o.na === 0) {
+      line = 'Nothing scored yet';
+    } else {
+      line = o.scored + ' of ' + o.total + ' criteria scored';
+      if (o.na) line += ' · ' + o.na + ' cannot comment';
+      if (o.blank) line += ' · ' + o.blank + ' still blank';
+    }
+    document.getElementById('scored-line').textContent = line;
 
-    document.getElementById('final').innerHTML = fmt(final) + '<span> / 100</span>';
-    document.getElementById('scored-line').textContent = scored + ' of ' + all.length + ' criteria scored';
-    document.getElementById('verdict').textContent = verdict;
+    document.getElementById('verdict').textContent = verdictFor(o.final, gateFailed);
     document.getElementById('min-line').textContent =
-      state.min === null ? 'Minimum score not set yet'
-      : final === null ? 'Minimum to hire: ' + state.min + ' out of 100'
-      : final >= state.min ? 'Clears the ' + state.min + '-point minimum for this role'
+      o.final === null ? 'Minimum to hire: ' + state.min + ' out of 100'
+      : o.final >= state.min ? 'Clears the ' + state.min + '-point minimum for this role'
       : 'Below the ' + state.min + '-point minimum for this role';
     document.getElementById('gate-line').textContent =
-      state.gate === 'yes' ? 'Mandatory experience gate met'
-      : state.gate === 'no' ? 'Mandatory experience gate not met'
+      state.gate === 'yes' ? 'Mandatory gate met'
+      : state.gate === 'no' ? 'Mandatory gate not met'
       : 'Mandatory gate not recorded yet';
     document.getElementById('band').classList.toggle('failed', gateFailed);
+
+    var ready = !!(state.details.name || '').trim() && !!(state.details.assessor || '').trim() && !!state.decision;
+    document.getElementById('submit').disabled = !ready;
   }
 
+  // ---------- share codes ----------
+  // A code is "SPO-" + base64url of a pipe-joined record. Scores pack to one
+  // character each: 0-9 as themselves, 10 as "a", N/A as "x", unscored as "-".
+  var COLLECT_KEY = 'sp-scorecard-rig-offsider-collected-v1';
+  var DEC_CODE = { progress: 'p', train: 't', other: 'o', no: 'n' };
+  var DEC_FROM = { p: 'progress', t: 'train', o: 'other', n: 'no' };
+  var collected = [];
+
+  function packScores(scores) {
+    var out = '';
+    SECTIONS.forEach(function (sec) {
+      scores[sec].forEach(function (v) {
+        out += v === 'na' ? 'x' : v === null || v === undefined ? '-' : v === 10 ? 'a' : String(v);
+      });
+    });
+    return out;
+  }
+
+  function unpackScores(str) {
+    var counts = SECTIONS.map(function (sec) { return CRITERIA[sec].length; });
+    var need = counts.reduce(function (a, b) { return a + b; }, 0);
+    if (typeof str !== 'string' || str.length !== need) return null;
+    var scores = {}, pos = 0, ok = true;
+    SECTIONS.forEach(function (sec, si) {
+      scores[sec] = [];
+      for (var i = 0; i < counts[si]; i++) {
+        var ch = str.charAt(pos++);
+        if (ch === 'x') scores[sec].push('na');
+        else if (ch === '-') scores[sec].push(null);
+        else if (ch === 'a') scores[sec].push(10);
+        else if (ch >= '0' && ch <= '9') scores[sec].push(Number(ch));
+        else ok = false;
+      }
+    });
+    return ok ? scores : null;
+  }
+
+  function b64urlEncode(str) {
+    var bytes = new TextEncoder().encode(str);
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  function b64urlDecode(code) {
+    var b = code.replace(/-/g, '+').replace(/_/g, '/');
+    while (b.length % 4) b += '=';
+    var bin = atob(b);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+
+  function clean(v, max) {
+    return String(v === null || v === undefined ? '' : v).replace(/[|\r\n]+/g, ' ').trim().slice(0, max || 80);
+  }
+
+  function makeCode() {
+    var o = overall(state.scores);
+    var tick = TICKETS.map(function (t) { return state.tickets[t[0]] ? '1' : '0'; }).join('');
+    var parts = [
+      '1',
+      packScores(state.scores),
+      (state.gate || '-').charAt(0) + (state.min === 80 ? '8' : '7') + (DEC_CODE[state.decision] || '-'),
+      tick,
+      clean(state.details.name, 60),
+      clean(state.details.assessor, 60),
+      clean(state.details.stage, 40),
+      clean(state.details.date, 12),
+      clean(state.details.notes, 240)
+    ];
+    return 'SPO-' + b64urlEncode(parts.join('|'));
+  }
+
+  function readCode(raw) {
+    var code = String(raw || '').trim();
+    if (!code) return null;
+    if (code.indexOf('SPO-') !== 0) return null;
+    var text;
+    try { text = b64urlDecode(code.slice(4)); } catch (e) { return null; }
+    var p = text.split('|');
+    if (p.length < 9 || p[0] !== '1') return null;
+    var scores = unpackScores(p[1]);
+    if (!scores) return null;
+    var flags = p[2] || '---';
+    var o = overall(scores);
+    var tick = {};
+    TICKETS.forEach(function (t, i) { tick[t[0]] = (p[3] || '').charAt(i) === '1'; });
+    return {
+      code: code,
+      scores: scores,
+      gate: flags.charAt(0) === 'y' ? 'yes' : flags.charAt(0) === 'n' ? 'no' : null,
+      min: flags.charAt(1) === '8' ? 80 : 70,
+      decision: DEC_FROM[flags.charAt(2)] || null,
+      tickets: tick,
+      candidate: p[4] || 'Unnamed candidate',
+      candidateKey: candKey(p[4]) || 'unnamed',
+      assessor: p[5] || 'Unnamed assessor',
+      stage: p[6] || '',
+      assessedOn: p[7] || '',
+      notes: p[8] || '',
+      final: o.final,
+      scoredCount: o.scored,
+      naCount: o.na
+    };
+  }
+
+  function loadCollected() {
+    try {
+      var raw = JSON.parse(localStorage.getItem(COLLECT_KEY));
+      if (Array.isArray(raw)) {
+        collected = raw.map(readCode).filter(Boolean);
+      }
+    } catch (e) { collected = []; }
+  }
+
+  function saveCollected() {
+    try {
+      localStorage.setItem(COLLECT_KEY, JSON.stringify(collected.map(function (r) { return r.code; })));
+    } catch (e) {}
+  }
+
+  function addCodes(text, quiet) {
+    var lines = String(text || '').split(/[\s,]+/).filter(Boolean);
+    var added = 0, dupes = 0, bad = 0;
+    lines.forEach(function (line) {
+      var rec = readCode(line);
+      if (!rec) { bad++; return; }
+      if (collected.some(function (c) { return c.code === rec.code; })) { dupes++; return; }
+      collected.push(rec);
+      added++;
+    });
+    saveCollected();
+    syncReportPick(added ? collected[collected.length - 1].candidateKey : undefined);
+    if (quiet) return;
+    var msg = [];
+    if (added) msg.push(added + (added === 1 ? ' assessment added' : ' assessments added'));
+    if (dupes) msg.push(dupes + ' already collected');
+    if (bad) msg.push(bad + ' not a valid code');
+    setAddMsg(msg.length ? msg.join(' · ') : 'Nothing to add.', bad && !added ? 'bad' : added ? 'ok' : '');
+  }
+
+  function setMsg(text, kind) {
+    var el = document.getElementById('submit-msg');
+    el.textContent = text;
+    el.className = 'submit-msg' + (kind ? ' ' + kind : '');
+  }
+  function setAddMsg(text, kind) {
+    var el = document.getElementById('add-msg');
+    el.textContent = text;
+    el.className = 'submit-msg' + (kind ? ' ' + kind : '');
+  }
+
+  function candKey(name) {
+    return String(name || '').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+  }
+
+  function esc(s) {
+    return String(s === null || s === undefined ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  document.getElementById('submit').addEventListener('click', function () {
+    var name = (state.details.name || '').trim();
+    var assessor = (state.details.assessor || '').trim();
+    if (!name || !assessor || !state.decision) {
+      setMsg('Fill in the candidate name, your name and a recommendation first.', 'bad');
+      return;
+    }
+    var code = makeCode();
+    document.getElementById('code-out').hidden = false;
+    var box = document.getElementById('code-val');
+    box.value = code;
+    setMsg('Done. Your code is below.', 'ok');
+    addCodes(code, true);
+    document.getElementById('code-note').textContent =
+      'Also added to your own collected list below, so you do not need to paste it back.';
+    box.focus();
+    box.select();
+  });
+
+  document.getElementById('code-val').addEventListener('focus', function () { this.select(); });
+
+  document.getElementById('code-copy').addEventListener('click', async function () {
+    var box = document.getElementById('code-val');
+    var note = document.getElementById('code-note');
+    box.select();
+    try {
+      await navigator.clipboard.writeText(box.value);
+      note.textContent = 'Copied. Paste it into a message and send it on.';
+    } catch (e) {
+      note.textContent = 'Could not copy automatically. The code is selected, so copy it by hand.';
+    }
+  });
+
+  document.getElementById('code-add').addEventListener('click', function () {
+    var ta = document.getElementById('code-in');
+    addCodes(ta.value);
+    ta.value = '';
+  });
+
+  document.getElementById('rep-clear').addEventListener('click', function () {
+    if (!collected.length) { setAddMsg('Nothing collected yet.'); return; }
+    if (!window.confirm('Clear all ' + collected.length + ' collected assessments from this device?')) return;
+    collected = [];
+    saveCollected();
+    setAddMsg('Cleared.');
+    syncReportPick();
+  });
+
+  // ---------- combined report ----------
+  function meanOf(list) {
+    var nums = list.filter(function (v) { return typeof v === 'number'; });
+    if (!nums.length) return null;
+    return nums.reduce(function (a, b) { return a + b; }, 0) / nums.length;
+  }
+
+  function syncReportPick(preferKey) {
+    var sel = document.getElementById('rep-pick');
+    var groups = {};
+    collected.forEach(function (d) {
+      var k = d.candidateKey;
+      if (!groups[k]) groups[k] = { key: k, name: d.candidate, rows: [] };
+      groups[k].rows.push(d);
+    });
+    var keys = Object.keys(groups).sort(function (a, b) {
+      return groups[b].rows.length - groups[a].rows.length || groups[a].name.localeCompare(groups[b].name);
+    });
+    var want = preferKey || sel.value || candKey(state.details.name) || keys[0];
+    sel.innerHTML = '';
+    if (!keys.length) {
+      var opt = document.createElement('option');
+      opt.textContent = 'Nothing collected yet';
+      sel.appendChild(opt);
+      sel.disabled = true;
+    } else {
+      sel.disabled = false;
+      keys.forEach(function (k) {
+        var o = document.createElement('option');
+        o.value = k;
+        o.textContent = groups[k].name + '  (' + groups[k].rows.length + (groups[k].rows.length === 1 ? ' assessment)' : ' assessments)');
+        sel.appendChild(o);
+      });
+      sel.value = keys.indexOf(want) >= 0 ? want : keys[0];
+    }
+    renderReport(groups[sel.value]);
+  }
+
+  document.getElementById('rep-pick').addEventListener('change', function () { syncReportPick(this.value); });
+
+  function renderReport(group) {
+    var host = document.getElementById('rep-body');
+    if (!group || !group.rows.length) {
+      host.innerHTML = '<div class="empty-state">Nothing collected yet. Send this link to each assessor, ask them to finish their scorecard and send you the code, then paste the codes above.</div>';
+      return;
+    }
+
+    var rows = group.rows;
+    var combined = meanOf(rows.map(function (r) { return r.final; }));
+    var secAvg = {};
+    SECTIONS.forEach(function (sec) {
+      secAvg[sec] = meanOf(rows.map(function (r) { return stats(sec, r.scores).pts; }));
+    });
+    var gateFail = rows.some(function (r) { return r.gate === 'no'; });
+    var mins = rows.map(function (r) { return r.min; }).filter(function (m) { return typeof m === 'number'; });
+    var minUsed = mins.length ? Math.max.apply(null, mins) : DEFAULT_MIN;
+
+    var html = '';
+    html += '<div class="rep-summary' + (combined === null ? ' thin' : '') + '">';
+    html += '<div><div class="band-kicker">Combined score</div>';
+    html += '<div class="rep-big">' + fmt(combined) + '<span> / 100</span></div>';
+    html += '<div class="band-sub">' + rows.length + (rows.length === 1 ? ' assessment' : ' assessments') + ' · averaged</div></div>';
+    html += '<div class="band-verdict"><div class="band-title">' + esc(verdictFor(combined, gateFail)) + '</div>';
+    html += '<div class="band-line">' + (combined === null
+        ? 'Not every section has been scored yet'
+        : (combined >= minUsed ? 'Clears the ' + minUsed + '-point minimum' : 'Below the ' + minUsed + '-point minimum')) + '</div>';
+    html += '<div class="band-line">' + (gateFail ? 'At least one assessor recorded a failed gate' : 'No gate failures recorded') + '</div></div>';
+    html += '<div class="rep-cols">';
+    SECTIONS.forEach(function (sec) {
+      var lbl = sec === 'att' ? 'Attitude' : sec === 'skl' ? 'Skills' : 'Experience';
+      html += '<div class="rep-stat"><div class="rep-stat-v">' + fmt(secAvg[sec]) + ' <span style="font-size:12px;font-weight:600;opacity:0.6">/ ' + WEIGHTS[sec] + '</span></div><div class="rep-stat-l">' + lbl + '</div></div>';
+    });
+    html += '</div></div>';
+
+    html += '<div class="eyebrow" style="margin-top:28px">By assessor</div>';
+    html += '<div class="table-wrap"><table><thead><tr><th>Assessor</th><th>Stage</th><th class="num">Score</th><th class="num">Scored</th><th class="num">N/A</th><th>Recommendation</th><th></th></tr></thead><tbody>';
+    rows.forEach(function (r, idx) {
+      html += '<tr>';
+      html += '<td style="font-weight:600">' + esc(r.assessor) + '</td>';
+      html += '<td>' + esc(r.stage || '—') + '</td>';
+      html += '<td class="num">' + fmt(r.final) + '</td>';
+      html += '<td class="num">' + r.scoredCount + '</td>';
+      html += '<td class="num">' + r.naCount + '</td>';
+      html += '<td>' + esc(DEC_LABEL[r.decision] || '—') + '</td>';
+      html += '<td class="num"><button type="button" class="btn btn-tiny" data-del="' + esc(r.code) + '">Remove</button></td>';
+      html += '</tr>';
+      if (r.notes) {
+        html += '<tr><td colspan="7" style="padding-top:0;font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">' + esc(r.notes) + '</td></tr>';
+      }
+    });
+    html += '</tbody></table></div>';
+
+    html += '<div class="eyebrow" style="margin-top:28px">By criterion</div>';
+    html += '<p class="note" style="margin:0 0 10px">Rows flagged in red are where assessors differ by 4 points or more. Those are the ones worth a conversation.</p>';
+    html += '<div class="table-wrap"><table><thead><tr><th>Criterion</th>';
+    rows.forEach(function (r) { html += '<th class="num">' + esc((r.assessor || '').split(' ')[0]) + '</th>'; });
+    html += '<th class="num">Avg</th><th class="num">Spread</th></tr></thead><tbody>';
+    SECTIONS.forEach(function (sec) {
+      CRITERIA[sec].forEach(function (c, i) {
+        var vals = rows.map(function (r) { return r.scores[sec][i]; });
+        var nums = vals.filter(function (v) { return typeof v === 'number'; });
+        var avg = meanOf(nums);
+        var spread = nums.length > 1 ? Math.max.apply(null, nums) - Math.min.apply(null, nums) : null;
+        html += '<tr' + (spread !== null && spread >= 4 ? ' class="spread"' : '') + '>';
+        html += '<td>' + esc(c[0]) + '</td>';
+        vals.forEach(function (v) {
+          html += '<td class="num">' + (v === 'na' ? 'N/A' : (typeof v === 'number' ? v : '—')) + '</td>';
+        });
+        html += '<td class="num" style="font-weight:600">' + fmt(avg) + '</td>';
+        html += '<td class="num">' + (spread === null ? '—' : spread) + '</td>';
+        html += '</tr>';
+      });
+    });
+    html += '</tbody></table></div>';
+
+    host.innerHTML = html;
+
+    host.querySelectorAll('[data-del]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        if (!window.confirm('Remove this assessment from your collected list?')) return;
+        collected = collected.filter(function (c) { return c.code !== b.dataset.del; });
+        saveCollected();
+        syncReportPick();
+      });
+    });
+  }
+
+  loadCollected();
   render();
+  syncReportPick();
 })();
+
 </script>
