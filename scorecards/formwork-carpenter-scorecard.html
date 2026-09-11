@@ -216,6 +216,7 @@ footer a { font-size: 12px; margin-left: auto; }
         <label>Minimum score for this role</label>
         <div class="seg" role="radiogroup" aria-label="Minimum score">
           <label class="seg-opt"><input type="radio" name="min" value="70">70 &middot; General labouring</label>
+          <label class="seg-opt"><input type="radio" name="min" value="75">75 &middot; Skilled support</label>
           <label class="seg-opt"><input type="radio" name="min" value="80">80 &middot; Skilled &amp; operator</label>
         </div>
       </div>
@@ -269,7 +270,7 @@ footer a { font-size: 12px; margin-left: auto; }
         <div class="sec-avg" id="skl-avg">avg &mdash; / 10</div>
       </div>
     </div>
-    <p class="sec-note">Criteria below are set for the Formwork Carpenter / All-Rounder role, working under the lead formworker on capping beams. Steel fixing is helpful, not essential.</p>
+    <p class="sec-note">Criteria below are set for the Formwork Carpenter / All-Rounder role, working under the lead formworker on capping beams. This is a skilled support role, so the 75-point minimum applies. Steel fixing is helpful, not essential.</p>
       <div class="crit">
         <div class="crit-label"><div class="crit-name">Shutter Building &amp; Installation</div><div class="crit-desc">Builds and installs basic shutters, typically around 600mm, square, plumb and to line.</div></div>
         <div class="scale" role="group" aria-label="Shutter Building & Installation" data-sec="skl" data-i="0"></div>
@@ -361,6 +362,7 @@ footer a { font-size: 12px; margin-left: auto; }
             <thead><tr><th>Role type</th><th>Minimum final score</th></tr></thead>
             <tbody>
               <tr><td>General labouring</td><td>70 out of 100</td></tr>
+              <tr><td>Skilled support</td><td>75 out of 100 (rig offsider, formwork carpenter)</td></tr>
               <tr><td>Skilled and operator roles</td><td>80 out of 100 (any plant or equipment operator)</td></tr>
             </tbody>
           </table></div>
@@ -402,7 +404,7 @@ footer a { font-size: 12px; margin-left: auto; }
   var COUNTS = { att: 6, skl: 6, exp: 3 };
   var WEIGHTS = { att: 60, skl: 20, exp: 20 };
   var DEFAULT_ROLE = "Formwork Carpenter / All-Rounder";
-  var DEFAULT_MIN = 80;
+  var DEFAULT_MIN = 75;
 
   function blank() {
     return {

@@ -285,6 +285,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
         <label>Minimum score for this role</label>
         <div class="seg" role="radiogroup" aria-label="Minimum score">
           <label class="seg-opt"><input type="radio" name="min" value="70">70 &middot; General labouring</label>
+          <label class="seg-opt"><input type="radio" name="min" value="75">75 &middot; Skilled support</label>
           <label class="seg-opt"><input type="radio" name="min" value="80">80 &middot; Skilled &amp; operator</label>
         </div>
       </div>
@@ -316,7 +317,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
         <div class="sec-avg" id="skl-avg">avg &mdash; / 10</div>
       </div>
     </div>
-    <p class="sec-note">Criteria below are set for the Piling Offsider role. The offsider is the eyes and ears for the rig operator, so spotting and communication matter most. Use <strong>N/A</strong> where you had no chance to see it, rather than scoring 0.</p>
+    <p class="sec-note">Criteria below are set for the Piling Offsider role. This is a skilled support role, so the 75-point minimum applies. The offsider is the eyes and ears for the rig operator, so spotting and communication matter most. Use <strong>N/A</strong> where you had no chance to see it, rather than scoring 0.</p>
     <div id="skl-rows"></div>
     <div class="warn" id="skl-warn" hidden></div>
   </section>
@@ -446,6 +447,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
             <thead><tr><th>Role type</th><th>Minimum final score</th></tr></thead>
             <tbody>
               <tr><td>General labouring</td><td>70 out of 100</td></tr>
+              <tr><td>Skilled support</td><td>75 out of 100 (rig offsider, formwork carpenter)</td></tr>
               <tr><td>Skilled and operator roles</td><td>80 out of 100 (any plant or equipment operator)</td></tr>
             </tbody>
           </table></div>
@@ -488,7 +490,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
   var WEIGHTS = { att: 60, skl: 20, exp: 20 };
   var SECTIONS = ['att', 'skl', 'exp'];
   var DEFAULT_ROLE = 'Piling Offsider';
-  var DEFAULT_MIN = 70;
+  var DEFAULT_MIN = 75;
 
   var CRITERIA = {
     att: [
@@ -841,7 +843,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
     var parts = [
       '1',
       packScores(state.scores),
-      (state.gate || '-').charAt(0) + (state.min === 80 ? '8' : '7') + (DEC_CODE[state.decision] || '-'),
+      (state.gate || '-').charAt(0) + (state.min === 80 ? '8' : state.min === 75 ? '5' : '7') + (DEC_CODE[state.decision] || '-'),
       tick,
       clean(state.details.name, 60),
       clean(state.details.assessor, 60),
@@ -870,7 +872,7 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
       code: code,
       scores: scores,
       gate: flags.charAt(0) === 'y' ? 'yes' : flags.charAt(0) === 'n' ? 'no' : null,
-      min: flags.charAt(1) === '8' ? 80 : 70,
+      min: flags.charAt(1) === '8' ? 80 : flags.charAt(1) === '5' ? 75 : 70,
       decision: DEC_FROM[flags.charAt(2)] || null,
       tickets: tick,
       candidate: p[4] || 'Unnamed candidate',
